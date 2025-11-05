@@ -37,23 +37,28 @@ export async function getPostById(req, res) {
 // POST LOGIC
 // Create a post
 export async function createPost(req, res) {
-  const { title, content, authorId, categoryId, published, excerpt } = req.body;
-
-  if (!title || !content || !authorId) {
-    return res.status(400).json({ error: 'Missing required fields' });
-  }
-
   try {
+    const { title, content, categoryId, published, excerpt } = req.body;
+
+    // The authorId now comes fomr the logged-in user's JWT
+    const authorId = req.user.userId;
+
+    // Validate required fields
+    if (!title || !content) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
     // Slug for the post title
     const slug = title.toLowerCase().replace(/\s+/g, '-');
 
+    // Create the post in the database
     const post = await prisma.post.create({
       data: {
         title,
         slug,
         content,
         excerpt,
-        published: published ?? false,
+        published: published ?? false, // default to false if undefined
         author: { connect: { id: authorId } },
         category: categoryId ? { connect: { id: categoryId } } : undefined,
       },
