@@ -6,7 +6,7 @@ import { getToken, logout } from '../utils/auth.js';
 export default function Dashboard() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const token = getToken();
 
   // Fetch all posts from the API when component mounts

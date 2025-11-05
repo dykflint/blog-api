@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import PostEditor from './components/PostEditor.jsx';
 import { getToken } from './utils/auth.js';
 
 // A small wrapper to protect routes that require authentication
@@ -36,12 +37,21 @@ export default function App() {
 
         <Route
           path="/posts/new"
-          element={<ProtectedRoute>{/* <PostEditor mode="create" />*/}</ProtectedRoute>}
+          element={
+            <ProtectedRoute>
+              <PostEditor mode="create" />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/posts/:id/edit"
-          element={<ProtectedRoute>{/* <PostEditor mode="edit" />*/}</ProtectedRoute>}
+          element={
+            <ProtectedRoute>
+              {' '}
+              <PostEditor mode="edit" />
+            </ProtectedRoute>
+          }
         />
 
         {/* Redirect all unknown routes to dashboard if logged in, or login otherwise */}
