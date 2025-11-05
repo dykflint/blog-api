@@ -37,3 +37,11 @@ export async function authorizePostOwner(req, res, next) {
     return res.status(500).json({ error: 'Server error' });
   }
 }
+
+export async function authorizeAdmin(req, res, next) {
+  if (req.user.role !== 'ADMIN') {
+    return res.status(403).json({ error: 'Admin privileges required' });
+  }
+
+  next();
+}

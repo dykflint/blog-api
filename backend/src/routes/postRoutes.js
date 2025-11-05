@@ -8,7 +8,7 @@ import {
   updatePost,
 } from '../controllers/postController.js';
 import { authenticateToken } from '../middlewares/authMiddleware.js';
-import { authorizePostOwner } from '../middleware/authorization.js';
+import { authorizePostOwner } from '../middlewares/authorization.js';
 
 const router = express.Router();
 
