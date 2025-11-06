@@ -24,7 +24,7 @@ export async function getCommentsForPost(req, res) {
 export async function createComment(req, res) {
   const { postId } = req.params;
   const { content } = req.body;
-  const userId = req.user.userId; // Comes frmo JWT auth
+  const userId = req.user?.userId; // Optional chaining, may be undefined. If defined it comes from JWT.
 
   if (!content) {
     return res.status(400).json({ error: 'Comment content is required' });
@@ -41,7 +41,8 @@ export async function createComment(req, res) {
     const comment = await prisma.comment.create({
       data: {
         content,
-        author: { connect: { id: userId } },
+        author: userId ? { connect: { id: userId } } : undefined,
+        authorName: userId ? userId : 'Anonymous', // fallback to "Anonymous"
         post: { connect: { id: postId } },
       },
       include: { author: true },

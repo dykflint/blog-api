@@ -12,7 +12,7 @@ const router = express.Router();
 
 // Routes scoped under /api/posts/:postId/comments
 router.get('/:postId/comments', getCommentsForPost);
-router.post('/:postId/comments', authenticateToken, createComment);
+router.post('/:postId/comments', createComment);
 
 // For updating/deleting specific comments (by Comment ID)
 router.put('/comments/:id', authenticateToken, updateComment);

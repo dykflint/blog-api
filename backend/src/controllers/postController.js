@@ -6,7 +6,9 @@ import prisma from '../prisma/client.js';
 export async function getAllPosts(req, res) {
   try {
     const posts = await prisma.post.findMany({
-      where: { published: true },
+      where: {
+        OR: [{ published: true }, { published: false }],
+      },
       include: { author: true, category: true, comments: true },
     });
     res.json(posts);

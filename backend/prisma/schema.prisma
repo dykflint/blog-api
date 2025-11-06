@@ -65,11 +65,12 @@ model Comment {
   updatedAt DateTime @updatedAt
 
   // Relations
-  post   Post   @relation(fields: [postId], references: [id])
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId String
 
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId String
+  author     User?   @relation(fields: [authorId], references: [id])
+  authorId   String?
+  authorName String? // name for anonymous comments
 
   // Optional for guest comments
   guestName  String?

@@ -7,7 +7,12 @@ import commentRoutes from './routes/commentRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:5173', // change this to your frontend URL
+    credentials: true, // if you want cookies or auth headers to work
+  }),
+);
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
