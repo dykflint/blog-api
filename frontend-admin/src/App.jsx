@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import PostEditor from './components/PostEditor.jsx';
+import Comments from './pages/Comments.jsx';
+import Categories from './pages/Categories.jsx';
 import { getToken } from './utils/auth.js';
 
 // A small wrapper to protect routes that require authentication
@@ -26,6 +28,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
 
         {/* Protected routes: must be logged in */}
+        {/* Dashboard */}
         <Route
           path="/dashboard"
           element={
@@ -34,7 +37,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
+        {/* Posts Management */}
         <Route
           path="/posts/new"
           element={
@@ -54,6 +57,25 @@ export default function App() {
           }
         />
 
+        {/* Comments Management */}
+        <Route
+          path="/posts/:postId/comments"
+          element={
+            <ProtectedRoute>
+              <Comments />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Categories Management */}
+        <Route
+          path="/categories"
+          element={
+            <ProtectedRoute>
+              <Categories />
+            </ProtectedRoute>
+          }
+        />
         {/* Redirect all unknown routes to dashboard if logged in, or login otherwise */}
         <Route
           path="*"

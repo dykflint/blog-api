@@ -91,6 +91,9 @@ export default function Dashboard() {
       {/* Button to create a new post */}
       <button onClick={() => navigate('/posts/new')}>New Post</button>
 
+      {/* Button to manage categories */}
+      <button onClick={() => navigate('/categories')}>Manage Categories</button>
+
       {/* Posts table */}
       <table border="1" cellPadding="8" style={{ marginTop: '1rem', width: '100%' }}>
         <thead>
@@ -114,6 +117,9 @@ export default function Dashboard() {
                 <button onClick={() => handleDelete(post.id)}>Delete</button>
                 <button onClick={() => handleTogglePublish(post)}>
                   {post.published ? 'Unpublish' : 'Publish'}
+                </button>
+                <button onClick={() => navigate(`/posts/${post.id}/comments`)}>
+                  Manage Comments
                 </button>
               </td>
             </tr>
